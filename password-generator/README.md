@@ -11,5 +11,3 @@ Generate secure and customizable passwords with ease using this React-based Pass
 ## Demo
 
 Check out the live demo [here](https://password-generator-omega-liard.vercel.app/).
-
-## Screenshots
