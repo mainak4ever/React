@@ -1,5 +1,6 @@
 # State Concepts imp
 
+```javascript
 const [counter, setCounter] = useState(15);
 
 some onclick func = () => {
@@ -28,6 +29,8 @@ setCounter(counter + 1);
 setCounter(counter + 2);
 setCounter(counter + 3);
 }
+
+```
 In this scenario:
 
 setCounter(counter + 1) It schedules an update to counter + 1 (from the initial state of 15, this schedules an update to 16).
@@ -56,8 +59,8 @@ const memoizedCallback = useCallback(() => {
 }, [dependency1, dependency2]);
 Optimizing Child Components: When a callback is passed as a prop to a child component and that component uses React.memo for performance optimization based on props comparison, useCallback ensures the same reference is maintained when its dependencies don't change, avoiding unnecessary re-renders of the child component.
 
-javascript
-Copy code
+```javascript
+
 const MyComponent = () => {
 const handleClick = useCallback(() => {
 // Click handler logic
@@ -85,11 +88,12 @@ return (
 </div>
 );
 };
+```
 
 Remember, while useCallback can be helpful in optimizing performance, it's essential to use it judiciously. Overusing it for all functions may not always be beneficial as it could lead to unnecessary complexity. It's best used when you notice actual performance issues related to function recreation or when optimizing specific callback dependencies in your components.
 
 Example:
-
+```javascript
 import React, { useState, useCallback } from 'react';
 
 const ListComponent = ({ items, onItemClick }) => {
@@ -127,7 +131,7 @@ return (
 };
 
 export default App;
-
+```
 my Question :
 
 so u are saying if i dont use useCallback , the onItemClick func in the ListComponenet will get recreated and using useCallback it wont get recreated ?
@@ -153,7 +157,7 @@ If the onClick handler is used directly within the parent component and not pass
 
 Let's consider an example:
 
-<script>
+```javascript
     import React, { useState, useCallback } from 'react';
 
 const App = () => {
@@ -183,7 +187,7 @@ const App = () => {
 };
 
 export default App;
-</script>
+```
 
 In this scenario, the handleItemClick function is used directly within the parent component's rendering logic. Even though there's no child component explicitly receiving onClick, handleItemClick is indirectly used as an event handler within the parent component's rendering.
 
@@ -206,8 +210,7 @@ However, it's essential to strike a balance. Not every function needs to be memo
 useRef is like a box that can hold anything you put inside it. Imagine it as a box with a label where you can store and retrieve things whenever you want, and it doesn't make the room (your component) rearrange itself when you put things in or take them out.
 
 1. Storing Values Without Causing Rerenders:
-   javascript
-   Copy code
+```javascript
    import React, { useState, useRef } from 'react';
 
 const Counter = () => {
@@ -229,10 +232,9 @@ return (
 );
 };
 Here, previousCountRef helps store the previous count value without causing a rerender when the count changes.
-
+```
 2. Holding onto Information:
-   javascript
-   Copy code
+```javascript
    import React, { useRef, useEffect } from 'react';
 
 const Timer = () => {
@@ -252,11 +254,11 @@ console.log('Tick');
 
 return <div>Timer component</div>;
 };
+```
 In this case, intervalRef holds the ID of the setInterval function. Even though it's changed inside the useEffect, it won't cause the component to re-render.
 
 3. Keeping Track of Things:
-   javascript
-   Copy code
+```javascript
    import React, { useRef } from 'react';
 
 const InputComponent = () => {
@@ -276,6 +278,7 @@ return (
 </div>
 );
 };
+```
 Here, inputRef is used to reference an input element and focus it when a button is clicked. The value of inputRef remains consistent across renders without causing re-renders.
 
 ref.current use ?
@@ -287,7 +290,8 @@ When you create a ref using useRef, ref.current gives you direct access to the u
 # useId
 
 generates unique id,
-
+```javascript
 cont passwordId = useId()
+```
 
-call where u need it. Dont use in keys .
+give passwordId where u need unique id. Dont use for keys .
